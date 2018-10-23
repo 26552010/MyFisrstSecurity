@@ -1,0 +1,45 @@
+```
+
+root@kali:~# openssl genrsa -out private.pem 1024
+Generating RSA private key, 1024 bit long modulus
+.++++++
+.......................++++++
+e is 65537 (0x010001)
+root@kali:~# cat private.pem 
+-----BEGIN RSA PRIVATE KEY-----
+MIICXgIBAAKBgQDZpKzersSlEKm0xQb/c2f1KEajm+kzRD+V0D0w149tMraJG43K
+nrvXD6PlcVEzPL2BKLj+uF7Sgxmk5anI1pXv2J87nV8vcI1tRV075z7s8bLW2mav
+qRjxLDZ9q74Vz5Vw4pb39mrLyLXUU/fh+HgIABeGq3Bz85yaewi1OoiyIwIDAQAB
+AoGBAIc8DbZofgPa8LhEXO7JtOTeW9Y5gJO8ao4aUItSxeoiQs2680Xdj/Y3360n
+1j6yFUZ2GU0dHr5Le9m8Yt1KiOrT0yfODN02Lgn4Vekmnm3R8erWg9o6Fji1PARD
+DxwbhwEf0kI4QFzvyH2OOEwOf87DsfPPD3dpM6NOB+GorDpRAkEA92hLmrlcTJ+7
+MfhZmEQdrLp5P9/xyHsEZnlM/ZtUn2fx5lCB+jcVVbsbb8FKjnqFCPamSrTvI69a
+1EXBH1Gj7QJBAOEzvw5MfDqTyOS8eJ23ABnO+5gLi9ZHbgoYG+2Lrpno/nImygH4
+KMMvvzlLybOEs6OGkgqWItnw3dKSOOpIDE8CQFcD/aNbklT40RQQLyLYwj8gDski
+cJ18dt27yBJicW7nVjMVGcHxYbWXa1zw9NIL0YKHjZE09e7tG9sQ9Y2YXzkCQQCz
+Vb7WhygCib9YD5JJnfpxkvedy8wO1pEVbr+Guk5PeFBv3N3PFax4SuSPnv+/enSH
+S1mvHoIgZgRvdEvonXlXAkEAl2Lt5UyGXrVDjxNw8vSVv8sxePjYu96GDDNlRBrC
+UNdTPwN1Z+uacqWqua7qLGYFdzHU1O+w6wlVqZS+L86k4w==
+-----END RSA PRIVATE KEY-----
+root@kali:~# openssl rsa -in private.pem -out public.pem -outform PEM -pubout
+writing RSA key
+root@kali:~# cat public.pem 
+-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDZpKzersSlEKm0xQb/c2f1KEaj
+m+kzRD+V0D0w149tMraJG43KnrvXD6PlcVEzPL2BKLj+uF7Sgxmk5anI1pXv2J87
+nV8vcI1tRV075z7s8bLW2mavqRjxLDZ9q74Vz5Vw4pb39mrLyLXUU/fh+HgIABeG
+q3Bz85yaewi1OoiyIwIDAQAB
+-----END PUBLIC KEY-----
+root@kali:~# echo 1234567886875
+1234567886875
+root@kali:~# echo 1234567886875 > file
+root@kali:~# cat file 
+1234567886875
+root@kali:~# openssl rsautl -encrypt -inkey public.pem -pubin -in file -out file.rsa
+root@kali:~# cat file.rsa
+�>���9	l�Ye��^�>�ArU����	���w܏2���MQ���У�]����	��PJ?m��X՛�_Vc'B�Sf����eO}n�	l)�8� [7;�Ů�RO�����y���,��/����Xroot@kali:~# openssl ro^C
+root@kali:~# openssl rsautl -decrypt -inkey private.pem -in file.rsa -out file.solution
+root@kali:~# cat file.solution 
+1234567886875
+
+```
